@@ -8,25 +8,19 @@ import {
   TouchableOpacity,
 } from "react-native";
 //import { CATERGORIES } from "../data/dummy-data";
-const dataURl = "http://ffb9908d13c8.ngrok.io/CATERGORIES";
+const dataURl = "https://58d369c131a6.ngrok.io/CATERGORIES";
 const cataScreen = (props) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch(dataURl)
-      .then((response) => {
+    fetch(`https://58d369c131a6.ngrok.io/CATERGORIES`)
+      .then((response) => response.json())
+      .then((data) => {
         debugger;
-        response.json();
-        console.log("response",response);
+        setData(data);
       })
-      
-      //.then((json) => setData(json.CATERGORIES))
-      .catch((error) =>{
-        console.log("error",error);
-        alert(error);
-      } )
-      .finally(setLoading(false));
-  });
+      .catch((err) => console.log(err));
+  }, []);
 
   const renderGridItem = (itemData) => {
     return (
